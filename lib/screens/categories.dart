@@ -24,7 +24,10 @@ class _CategoriesState extends State<Categories> {
           itemCount: categories.length,
           itemBuilder: (context, index) {
             Category category = categories[index];
-            return ListTile(
+            return Card(
+              child: Padding(
+                padding: EdgeInsets.all(5.0),
+                child: ListTile(              
               title: Text(category.name),
               trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
                 IconButton(
@@ -63,6 +66,8 @@ class _CategoriesState extends State<Categories> {
                   },
                 )
               ]),
+            ),
+            ),
             );
           },
         ),
