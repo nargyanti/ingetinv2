@@ -24,51 +24,56 @@ class _TodosState extends State<Todos> {
         itemCount: todos.length,
         itemBuilder: (context, index) {
           Todo todo = todos[index];
-          return ListTile(
-            title: Text('\$' + todo.name),
-            subtitle: Text(todo.name),
-            trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(todo.dueDate),
-                Text(todo.dueTime),
-                Text(todo.description),
+          return Card(
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: ListTile(        
+              title: Text(todo.name),
+              subtitle: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text(todo.description),
+                  Text(todo.dueDate),
+                  Text(todo.dueTime),
+                ])
               ]),
-              IconButton(
-                icon: Icon(Icons.edit),
-                onPressed: () {
-                  showModalBottomSheet(
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (BuildContext context) {
-                        return TodoEdit(
-                            todo, provider.updateTodo);
-                      });
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text("Confirmation"),
-                          content: Text("Are you sure you want to delete?"),
-                          actions: [
-                            TextButton(
-                              child: Text("Cancel"),
-                              onPressed: () => Navigator.pop(context),
-                            ),
-                            TextButton(
-                                child: Text("Delete"),
-                                onPressed: () => deleteTodo(
-                                    provider.deleteTodo, todo, context)),
-                          ],
-                        );
-                      });
-                },
-              )
-            ]),
+              trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                    showModalBottomSheet(
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return TodoEdit(todo, provider.updateTodo);
+                        });
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Confirmation"),
+                            content: Text("Are you sure you want to delete?"),
+                            actions: [
+                              TextButton(
+                                child: Text("Cancel"),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                              TextButton(
+                                  child: Text("Delete"),
+                                  onPressed: () => deleteTodo(
+                                      provider.deleteTodo, todo, context)),
+                            ],
+                          );
+                        });
+                  },
+                )
+              ]),
+              isThreeLine: true,
+          ),),
           );
         },
       ),
