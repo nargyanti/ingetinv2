@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_this, unnecessary_new, file_names
+
 import 'package:flutter/material.dart';
 import 'package:ingetin/services/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,7 +31,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> login(String email, String password) async {
+  Future<void> login(String email, String password) async {    
     this.token = await apiService.login(email, password);
     setToken(this.token);
     this.isAuthenticated = true;
