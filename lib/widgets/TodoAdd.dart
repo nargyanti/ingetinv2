@@ -34,23 +34,16 @@ class _TodoAddState extends State<TodoAdd> {
             child: Column(children: <Widget>[
               TextFormField(
                 controller: todoNameController,                
-                keyboardType: TextInputType.numberWithOptions(
-                    signed: true, decimal: true),
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Amount',
-                  icon: Icon(Icons.attach_money),
-                  hintText: '0',
+                  labelText: 'Name',
+                  icon: Icon(Icons.attach_money),                  
                 ),
                 validator: (value) {
                   if (value!.trim().isEmpty) {
                     return 'Amount is required';
-                  }
-                  final newValue = double.tryParse(value);
-
-                  if (newValue == null) {
-                    return 'Invalid amount format';
-                  }
+                  }                  
                 },
                 onChanged: (text) => setState(() => errorMessage = ''),
               ),
@@ -90,8 +83,7 @@ class _TodoAddState extends State<TodoAdd> {
               ),
                TextFormField(
                 controller: todoDueTimeController,
-                keyboardType: TextInputType.numberWithOptions(
-                    signed: true, decimal: true),
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Time',
@@ -179,11 +171,11 @@ class _TodoAddState extends State<TodoAdd> {
     }
 
     await widget.todoCallback(
-        todoNameController.text,
-        todoCategoryController.text,
+        todoNameController.text,        
         todoDescriptionController.text,
         todoDueDateController.text,
-        todoDueTimeController.text
+        todoDueTimeController.text,
+        todoCategoryController.text
     );
     Navigator.pop(context);
   }

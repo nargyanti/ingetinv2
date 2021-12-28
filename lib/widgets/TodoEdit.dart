@@ -46,8 +46,7 @@ class _TodoEditState extends State<TodoEdit> {
             child: Column(children: <Widget>[
               TextFormField(
                 controller: todoNameController,            
-                keyboardType: TextInputType.numberWithOptions(
-                    signed: true, decimal: true),
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Name',
@@ -57,12 +56,7 @@ class _TodoEditState extends State<TodoEdit> {
                 validator: (value) {
                   if (value!.trim().isEmpty) {
                     return 'Name is required';
-                  }
-                  final newValue = double.tryParse(value);
-
-                  if (newValue == null) {
-                    return 'Invalid name format';
-                  }
+                  }                 
                 },
                 onChanged: (text) => setState(() => errorMessage = ''),
               ),

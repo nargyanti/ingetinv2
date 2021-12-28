@@ -22,7 +22,7 @@ class TodoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addTodo(String name, String description, String dueDate, String dueTime, int categoryId) async {
+  Future<void> addTodo(String name, String description, String dueDate, String dueTime, String categoryId) async {
     try {
       Todo addedTodo = await apiService.addTodo(name, description, dueDate, dueTime, categoryId);
       todos.add(addedTodo);
