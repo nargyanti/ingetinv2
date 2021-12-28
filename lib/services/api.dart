@@ -12,7 +12,7 @@ class ApiService {
     this.token = token;
   }
 
-  final String baseUrl = 'https://ingetin.ceban-app.com/api';
+  final String baseUrl = 'https://ingetin.ceban-app.com/api/';
 
   Future<List<Category>> fetchCategories() async {
     http.Response response = await http.get(
@@ -23,7 +23,7 @@ class ApiService {
       },
     );
 
-    List categories = jsonDecode(response.body);
+    List categories = jsonDecode(response.body)['data'];
 
     return categories.map((category) => Category.fromJson(category)).toList();
   }
@@ -43,7 +43,7 @@ class ApiService {
       throw Exception('Error happened on create');
     }
 
-    return Category.fromJson(jsonDecode(response.body));
+    return Category.fromJson(jsonDecode(response.body)['data']);
   }
 
   Future<Category> updateCategory(Category category) async {
@@ -88,12 +88,13 @@ class ApiService {
       },
     );
 
-    List todos = jsonDecode(response.body);
+    var todos = jsonDecode(response.body)['data'] as List;
 
     return todos.map((todo) => Todo.fromJson(todo)).toList();
   }
 
-  Future<Todo> addTodo(String name, String description, String dueDate, String dueTime, int categoryId) async {
+  Future<Todo> addTodo(String name, String description, String dueDate,
+      String dueTime, int categoryId) async {
     String uri = baseUrl + 'todos';
 
     http.Response response = await http.post(Uri.parse(uri),
@@ -103,7 +104,7 @@ class ApiService {
           HttpHeaders.authorizationHeader: 'Bearer $token'
         },
         body: jsonEncode({
-          'name': name,          
+          'name': name,
           'description': description,
           'due_date': dueDate,
           'due_time': dueTime,
@@ -127,7 +128,8 @@ class ApiService {
           HttpHeaders.authorizationHeader: 'Bearer $token'
         },
         body: jsonEncode({
-          'name': todo.name,          
+          'id': todo.id,
+          'name': todo.name,
           'description': todo.description,
           'due_date': todo.dueDate,
           'due_time': todo.dueTime,
@@ -138,7 +140,7 @@ class ApiService {
       throw Exception('Error happened on update');
     }
 
-    return Todo.fromJson(jsonDecode(response.body));
+    return Todo.fromJson(jsonDecode(response.body)['data']);
   }
 
   Future<void> deleteTodo(id) async {
@@ -169,7 +171,7 @@ class ApiService {
           'name': name,
           'email': email,
           'password': password,
-          'password_confirmation': passwordConfirm,          
+          'password_confirmation': passwordConfirm,
         }));
 
     if (response.statusCode == 422) {
@@ -198,8 +200,9 @@ class ApiService {
         },
         body: jsonEncode({
           'email': email,
-          'password': password,          
-        }));
+          'password': password,
+        })
+        );
 
     if (response.statusCode == 422) {
       Map<String, dynamic> body = jsonDecode(response.body);
@@ -213,7 +216,7 @@ class ApiService {
       throw Exception(errorMessage);
     }
 
-    // return token
+    // return token    
     return response.body;
   }
 }
