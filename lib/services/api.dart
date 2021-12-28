@@ -39,9 +39,9 @@ class ApiService {
         },
         body: jsonEncode({'name': name}));
 
-    if (response.statusCode != 201) {
-      throw Exception('Error happened on create');
-    }
+    // if (response.statusCode != 201) {
+    //   throw Exception('Error happened on create');
+    // }
 
     return Category.fromJson(jsonDecode(response.body)['data']);
   }
@@ -55,13 +55,16 @@ class ApiService {
           HttpHeaders.acceptHeader: 'application/json',
           HttpHeaders.authorizationHeader: 'Bearer $token'
         },
-        body: jsonEncode({'name': category.name}));
+        body: jsonEncode({
+          'id': category.id,
+          'name': category.name,
+        }));
 
-    if (response.statusCode != 200) {
-      throw Exception('Error happened on update');
-    }
+    // if (response.statusCode != 200) {
+    //   throw Exception('Error happened on update');
+    // }
 
-    return Category.fromJson(jsonDecode(response.body));
+    return Category.fromJson(jsonDecode(response.body)['data']);
   }
 
   Future<void> deleteCategory(id) async {
@@ -74,9 +77,9 @@ class ApiService {
       },
     );
 
-    if (response.statusCode != 204) {
-      throw Exception('Error happened on delete');
-    }
+    // if (response.statusCode != 204) {
+    //   throw Exception('Error happened on delete');
+    // }
   }
 
   Future<List<Todo>> fetchTodos() async {
@@ -94,7 +97,7 @@ class ApiService {
   }
 
   Future<Todo> addTodo(String name, String description, String dueDate,
-      String dueTime, int categoryId) async {
+      String dueTime, String categoryId) async {
     String uri = baseUrl + 'todos';
 
     http.Response response = await http.post(Uri.parse(uri),
@@ -111,11 +114,13 @@ class ApiService {
           'category_id': categoryId
         }));
 
-    if (response.statusCode != 201) {
-      throw Exception('Error happened on create');
-    }
+    // if (response.statusCode != 201) {
+    //   throw Exception('Error happened on create');
+    // }
 
-    return Todo.fromJson(jsonDecode(response.body));
+    return Todo.fromJson(jsonDecode(response.body)) ;
+    // var todos = Todo.fromJson(jsonDecode(response.body)['data']) as List;
+    // return todos.map((todo) => Todo.fromJson(todo)).toList();
   }
 
   Future<Todo> updateTodo(Todo todo) async {
@@ -153,9 +158,9 @@ class ApiService {
       },
     );
 
-    if (response.statusCode != 204) {
-      throw Exception('Error happened on delete');
-    }
+    // if (response.statusCode != 204) {
+    //   throw Exception('Error happened on delete');
+    // }
   }
 
   Future<String> register(String name, String email, String password,
