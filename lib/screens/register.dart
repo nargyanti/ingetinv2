@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:ingetin/providers/AuthProvider.dart';
 import 'package:provider/provider.dart';
-import 'package:device_info/device_info.dart';
 
 class Register extends StatefulWidget {
   Register();
@@ -20,13 +19,11 @@ class _RegisterState extends State<Register> {
   final passwordController = TextEditingController();
   final passwordConfirmController = TextEditingController();
 
-  String errorMessage = '';
-  late String deviceName;
+  String errorMessage = '';  
 
   @override
   void initState() {
-    super.initState();
-    getDeviceName();
+    super.initState();    
   }
 
   @override
@@ -160,28 +157,6 @@ class _RegisterState extends State<Register> {
     } catch (Exception) {
       setState(() {
         errorMessage = Exception.toString().replaceAll('Exception: ', '');
-      });
-    }
-  }
-
-  Future<void> getDeviceName() async {
-    final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-
-    try {
-      if (Platform.isAndroid) {
-        var build = await deviceInfoPlugin.androidInfo;
-        setState(() {
-          deviceName = build.model;
-        });
-      } else if (Platform.isIOS) {
-        var build = await deviceInfoPlugin.iosInfo;
-        setState(() {
-          deviceName = build.model;
-        });
-      }
-    } on PlatformException {
-      setState(() {
-        deviceName = 'Failed to get platform version';
       });
     }
   }
