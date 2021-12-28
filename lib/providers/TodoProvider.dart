@@ -1,10 +1,12 @@
+// ignore_for_file: prefer_initializing_formals, file_names
+
 import 'package:flutter/material.dart';
 import 'package:ingetin/models/todo.dart';
 import 'package:ingetin/providers/AuthProvider.dart';
 import 'package:ingetin/services/api.dart';
 
 class TodoProvider extends ChangeNotifier {
-  List<Todo> todos = [];
+  List<dynamic> todos = [];
   late ApiService apiService;
   late AuthProvider authProvider;
 

@@ -1,6 +1,5 @@
 class Todo {
-  int id;
-  int userId;
+  int id;  
   int categoryId;
   String name;
   String description;
@@ -10,22 +9,21 @@ class Todo {
   String createdAt;
   String updatedAt;
 
-  Todo(
-      {required this.id,
-      required this.userId,      
-      required this.categoryId,      
-      required this.name,      
-      required this.description,
-      required this.dueDate,
-      required this.dueTime,
-      required this.isDone,
-      required this.createdAt,
-      required this.updatedAt});
+  Todo({
+    required this.id,    
+    required this.categoryId,      
+    required this.name,      
+    required this.description,
+    required this.dueDate,
+    required this.dueTime,
+    required this.isDone,
+    required this.createdAt,
+    required this.updatedAt
+  });
 
   factory Todo.fromJson(Map<String, dynamic> json) {
     return Todo(
-      id: json['id'],
-      userId: json['user_id'],
+      id: json['id'],      
       categoryId: json['category_id'],
       name: json['name'],
       description: json['description'],

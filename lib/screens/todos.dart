@@ -14,7 +14,7 @@ class _TodosState extends State<Todos> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TodoProvider>(context);
-    List<Todo> todos = provider.todos;
+    List todos = provider.todos;
 
     return Scaffold(
       appBar: AppBar(
