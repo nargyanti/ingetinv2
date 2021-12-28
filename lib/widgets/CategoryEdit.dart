@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, file_names
+
 import 'package:ingetin/models/category.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +27,7 @@ class _CategoryEditState extends State<CategoryEdit> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.only(top: 60.0, right: 15, left: 15),
         child: Form(
             key: _formKey,
             child: Column(children: <Widget>[

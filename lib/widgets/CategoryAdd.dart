@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, file_names
+
 import 'package:flutter/material.dart';
 
 class CategoryAdd extends StatefulWidget {
@@ -17,40 +19,41 @@ class _CategoryAddState extends State<CategoryAdd> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(10),
-        child: Form(
-            key: _formKey,
-            child: Column(children: <Widget>[
-              TextFormField(
-                controller: categoryNameController,
-                validator: (String? value) {
-                  if (value!.isEmpty) {
-                    return 'Enter category name';
-                  }
-
-                  return null;
-                },
-                onChanged: (text) => setState(() => errorMessage = ''),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Category name',
+      padding: EdgeInsets.only(top: 60.0, right: 15, left: 15),
+      child: Form(
+        key: _formKey,
+        child: Column(children: <Widget>[
+          TextFormField(
+            controller: categoryNameController,
+            validator: (String? value) {
+              if (value!.isEmpty) {
+                return 'Enter category name';
+              }
+              return null;
+            },
+            onChanged: (text) => setState(() => errorMessage = ''),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Category name',
+            ),
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                ElevatedButton(
+                  child: Text('Save'),
+                  onPressed: () => saveCategory(context),
                 ),
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    ElevatedButton(
-                      child: Text('Save'),
-                      onPressed: () => saveCategory(context),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.red),
-                      child: Text('Cancel'),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ]),
-              Text(errorMessage, style: TextStyle(color: Colors.red))
-            ])));
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.red),
+                  child: Text('Cancel'),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ]),
+          Text(errorMessage, style: TextStyle(color: Colors.red))
+        ]),
+      ),
+    );
   }
 
   Future saveCategory(context) async {
