@@ -119,8 +119,6 @@ class ApiService {
     // }
 
     return Todo.fromJson(jsonDecode(response.body)) ;
-    // var todos = Todo.fromJson(jsonDecode(response.body)['data']) as List;
-    // return todos.map((todo) => Todo.fromJson(todo)).toList();
   }
 
   Future<Todo> updateTodo(Todo todo) async {
