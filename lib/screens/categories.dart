@@ -17,60 +17,61 @@ class _CategoriesState extends State<Categories> {
     List<Category> categories = provider.categories;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Categories'),
-        ),
-        body: ListView.builder(
-          itemCount: categories.length,
-          itemBuilder: (context, index) {
-            Category category = categories[index];
-            return Card(
-              child: Padding(
-                padding: EdgeInsets.all(5.0),
-                child: ListTile(              
-              title: Text(category.name),
-              trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {
-                    showModalBottomSheet(
-                        isScrollControlled: true,
-                        context: context,
-                        builder: (BuildContext context) {
-                          return CategoryEdit(
-                              category, provider.updateCategory);
-                        });
-                  },
-                ),
-                IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("Confirmation"),
-                            content: Text("Are you sure you want to delete?"),
-                            actions: [
-                              TextButton(
-                                child: Text("Cancel"),
-                                onPressed: () => Navigator.pop(context),
-                              ),
-                              TextButton(
-                                child: Text("Delete"),
-                                onPressed: () => deleteCategory(provider.deleteCategory, category)
-                              ),
-                            ],
-                          );
-                        });
-                  },
-                )
-              ]),
+      appBar: AppBar(
+        title: Text('Categories'),
+      ),
+      body: ListView.builder(
+        itemCount: categories.length,
+        itemBuilder: (context, index) {
+          Category category = categories[index];
+          return Card(
+            child: Padding(
+              padding: EdgeInsets.all(5.0),
+              child: ListTile(
+                title: Text(category.name),
+                trailing:
+                    Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: () {
+                      showModalBottomSheet(
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return CategoryEdit(
+                                category, provider.updateCategory);
+                          });
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("Confirmation"),
+                              content: Text("Are you sure you want to delete?"),
+                              actions: [
+                                TextButton(
+                                  child: Text("Cancel"),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                                TextButton(
+                                    child: Text("Delete"),
+                                    onPressed: () => deleteCategory(
+                                        provider.deleteCategory, category)),
+                              ],
+                            );
+                          });
+                    },
+                  )
+                ]),
+              ),
             ),
-            ),
-            );
-          },
-        ),
+          );
+        },
+      ),
       floatingActionButton: new FloatingActionButton(
           onPressed: () {
             showModalBottomSheet(
@@ -80,8 +81,7 @@ class _CategoriesState extends State<Categories> {
                   return CategoryAdd(provider.addCategory);
                 });
           },
-          child: Icon(Icons.add)
-      ),
+          child: Icon(Icons.add)),
     );
   }
 
@@ -89,5 +89,4 @@ class _CategoriesState extends State<Categories> {
     await callback(category);
     Navigator.pop(context);
   }
-
 }
