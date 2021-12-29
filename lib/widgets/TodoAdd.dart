@@ -31,18 +31,17 @@ class _TodoAddState extends State<TodoAdd> {
         padding: EdgeInsets.only(top: 50, left: 10, right: 10),
         child: Form(
             key: _formKey,
-            child: Column(children: <Widget>[
-              TextFormField(
+            child: Column(children: <Widget>[                            
+              TextFormField(                
                 controller: todoNameController,                
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Name',
-                  icon: Icon(Icons.attach_money),                  
+                  labelText: 'Name',                               
                 ),
                 validator: (value) {
                   if (value!.trim().isEmpty) {
-                    return 'Amount is required';
+                    return 'Name is required';
                   }                  
                 },
                 onChanged: (text) => setState(() => errorMessage = ''),
@@ -70,11 +69,11 @@ class _TodoAddState extends State<TodoAdd> {
                 },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Todo date',
+                  labelText: 'Due date',
                 ),
                 validator: (value) {
                   if (value!.trim().isEmpty) {
-                    return 'Date is required';
+                    return 'Due date is required';
                   }
 
                   return null;

@@ -44,14 +44,14 @@ class _TodoEditState extends State<TodoEdit> {
         child: Form(
             key: _formKey,
             child: Column(children: <Widget>[
-              TextFormField(
+              Padding(
+                padding: EdgeInsets.only(top: 15.0),
+                child: TextFormField(
                 controller: todoNameController,            
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Name',
-                  icon: Icon(Icons.attach_money),
-                  hintText: '0',
+                  labelText: 'Name',                                    
                 ),
                 validator: (value) {
                   if (value!.trim().isEmpty) {
@@ -60,8 +60,14 @@ class _TodoEditState extends State<TodoEdit> {
                 },
                 onChanged: (text) => setState(() => errorMessage = ''),
               ),
-              buildCategoriesDropdown(),
-              TextFormField(
+              ), 
+              Padding(
+                padding: EdgeInsets.only(top: 15.0),
+                child: buildCategoriesDropdown(),
+              ),  
+              Padding(
+                padding: EdgeInsets.only(top: 15.0),
+                child: TextFormField(
                 controller: todoDescriptionController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -76,14 +82,17 @@ class _TodoEditState extends State<TodoEdit> {
                 },
                 onChanged: (text) => setState(() => errorMessage = ''),
               ),
-              TextFormField(
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 15.0),
+                child: TextFormField(
                 controller: todoDueDateController,
                 onTap: () {
                   selectDate(context);
                 },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Todo date',
+                  labelText: 'Due date',
                 ),
                 validator: (value) {
                   if (value!.trim().isEmpty) {
@@ -94,10 +103,12 @@ class _TodoEditState extends State<TodoEdit> {
                 },
                 onChanged: (text) => setState(() => errorMessage = ''),
               ),
-              TextFormField(
+              ),     
+              Padding(
+                padding: EdgeInsets.only(top: 15.0),
+                child: TextFormField(
                 controller: todoDueTimeController,
-                keyboardType: TextInputType.numberWithOptions(
-                    signed: true, decimal: true),
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Time',
@@ -110,7 +121,8 @@ class _TodoEditState extends State<TodoEdit> {
                 },
                 onChanged: (text) => setState(() => errorMessage = ''),
               ),
-              Row(
+              ),                                                                  
+              Row(                
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     ElevatedButton(
