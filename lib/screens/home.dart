@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:ingetin/providers/AuthProvider.dart';
 import 'package:ingetin/screens/categories.dart';
@@ -27,7 +29,7 @@ class _HomeState extends State<Home> {
             elevation: 0,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                  icon: Icon(Icons.account_balance_wallet),
+                  icon: Icon(Icons.library_add_check),
                   label: 'Todos'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.category),
