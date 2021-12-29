@@ -28,12 +28,17 @@ class _TodosState extends State<Todos> {
               child: Padding(
                 padding: EdgeInsets.all(10.0),
                 child: ListTile(        
+              leading: Checkbox(
+                value: false,
+                onChanged: (bool? newValue) {
+                  true;
+                },
+              ),
               title: Text(todo.name),
               subtitle: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                   Text(todo.description),
-                  Text(todo.dueDate),
-                  Text(todo.dueTime),
+                  Text(todo.dueDate + '  ' + todo.dueTime),  
                 ])
               ]),
               trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
