@@ -30,10 +30,14 @@ class _TodosState extends State<Todos> {
                 child: ListTile(        
               title: Text(todo.name),
               subtitle: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                   Text(todo.description),
-                  Text(todo.dueDate),
-                  Text(todo.dueTime),
+                  Row(mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(todo.dueDate),
+                      Text(todo.dueTime),
+                    ],
+                  )
                 ])
               ]),
               trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
